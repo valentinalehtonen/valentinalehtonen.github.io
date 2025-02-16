@@ -11,13 +11,10 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #4E342E;">
+    <nav class="navbar navbar-dark fixed-top" style="background-color: #4E342E;">
         <div class="container-fluid">
             <a class="navbar-brand text-bg-light p-2 rounded" href="#">Tassutalo</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <div class="navbar-collapse">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="#">Kampanjat</a>
@@ -35,49 +32,33 @@
                         <div class="collapse" id="tuotteetHaitari">
                             <div class="accordion" id="tuotteet">
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingKoiranruoat">
+                                    <h2 class="accordion-header" id="kategoriaKoiranruoat">
                                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                             data-bs-target="#koiranruoat" aria-expanded="true"
                                             aria-controls="koiranruoat">
                                             Koiranruoat
                                         </button>
                                     </h2>
-                                    <div id="koiranruoat" class="accordion-collapse collapse show"
-                                        aria-labelledby="headingKoiranruoat" data-bs-parent="#tuotteet">
-                                        <div class="accordion-body">
-                                            <p>Koiranruoat</p>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingKissanruoat">
+                                    <h2 class="accordion-header" id="kategoriaKissanruoat">
                                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                             data-bs-target="#kissanruoat" aria-expanded="false"
                                             aria-controls="kissanruoat">
                                             Kissanruoat
                                         </button>
                                     </h2>
-                                    <div id="kissanruoat" class="accordion-collapse collapse"
-                                        aria-labelledby="headingKissanruoat" data-bs-parent="#tuotteet">
-                                        <div class="accordion-body">
-                                            <p>Kissanruoat</p>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingLelut">
+                                    <h2 class="accordion-header" id="kategoriaLelut">
                                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                             data-bs-target="#lelut" aria-expanded="false" aria-controls="lelut">
                                             Lelut
                                         </button>
                                     </h2>
-                                    <div id="lelut" class="accordion-collapse collapse" aria-labelledby="headingLelut"
-                                        data-bs-parent="#tuotteet">
-                                        <div class="accordion-body">
-                                            <p>Lelut</p>
-                                        </div>
-                                    </div>
                                 </div>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -93,7 +74,7 @@
 
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="tassutalo1.jpg" alt="Los Angeles" class="d-block w-100">
+                <img src="tassutalo1.jpg" alt="Koirat" class="d-block w-100">
                 <div class="carousel-caption">
                     <h3>Kevätkampanja</h3>
                     <p>Kaikki koiranruoat nyt -20 %</p>
@@ -101,7 +82,7 @@
             </div>
 
             <div class="carousel-item">
-                <img src="tassutalo4.jpg" alt="New York" class="d-block w-100">
+                <img src="tassutalo4.jpg" alt="Koira" class="d-block w-100">
                 <div class="carousel-caption">
                     <h3>Uutuus: Snacks-puruluut</h3>
                     <p>Paljon toivotut Snacks-puruluut nyt valikoimassamme!</p>
@@ -109,7 +90,7 @@
             </div>
 
             <div class="carousel-item">
-                <img src="tassutalo3.jpg" alt="Chicago" class="d-block w-100">
+                <img src="tassutalo3.jpg" alt="Koira" class="d-block w-100">
                 <div class="carousel-caption">
                     <h3>Vinkit koiranruoan valintaan</h3>
                     <p>Katso eläinlääkärin vinkit sopivan ruoan valintaan</p>
