@@ -29,12 +29,20 @@
             font-family: Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
         }
 
-        /* Haitarin tekstien korjaus isolle näytölle */
+        /*Korjaa haitarin tekstien paikkaa isolla näytöllä*/
         @media (min-width: 992px) {
             .accordion-button {
                 justify-content: center;
                 text-align: center
             }
+        }
+
+        /*Korjaa logon liikkumista haitaria avatessa*/ 
+        .navbar-brand {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
         }
     </style>
 </head>
