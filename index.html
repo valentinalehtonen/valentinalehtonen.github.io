@@ -9,9 +9,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         .accordion-button:focus,
-        .accordion-button:active {
-            background-color: #E8D3C5;
-            color:#4E342E;
+        .accordion-button:active
+        .accordion-button:not(.collapsed) {
+            background-color: #E8D3C5 !important;
+            color:#4E342E !important;
             box-shadow: none !important;
             outline: none !important;
         }
