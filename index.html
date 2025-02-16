@@ -28,14 +28,56 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#yhteystiedot">Yhteystiedot</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown">Tuotteet</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Koiranruoat</a></li>
-                            <li><a class="dropdown-item" href="#">Kissanruoat</a></li>
-                            <li><a class="dropdown-item" href="#">Lelut</a></li>
-                        </ul>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" role="button" data-bs-toggle="collapse"
+                            data-bs-target="#tuotteetHaitari">Tuotteet</a>
+                        <div class="collapse" id="tuotteetHaitari">
+                            <div class="accordion" id="tuotteet">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingKoiranruoat">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#koiranruoat" aria-expanded="true"
+                                            aria-controls="koiranruoat">
+                                            Koiranruoat
+                                        </button>
+                                    </h2>
+                                    <div id="koiranruoat" class="accordion-collapse collapse show"
+                                        aria-labelledby="headingKoiranruoat" data-bs-parent="#tuotteet">
+                                        <div class="accordion-body">
+                                            <p>Koiranruoat</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingKissanruoat">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#kissanruoat" aria-expanded="false"
+                                            aria-controls="kissanruoat">
+                                            Kissanruoat
+                                        </button>
+                                    </h2>
+                                    <div id="kissanruoat" class="accordion-collapse collapse"
+                                        aria-labelledby="headingKissanruoat" data-bs-parent="#tuotteet">
+                                        <div class="accordion-body">
+                                            <p>Kissanruoat</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingLelut">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#lelut" aria-expanded="false" aria-controls="lelut">
+                                            Lelut
+                                        </button>
+                                    </h2>
+                                    <div id="lelut" class="accordion-collapse collapse" aria-labelledby="headingLelut"
+                                        data-bs-parent="#tuotteet">
+                                        <div class="accordion-body">
+                                            <p>Lelut</p>
+                                        </div>
+                                    </div>
+                                </div>
                     </li>
                 </ul>
             </div>
