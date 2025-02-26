@@ -28,8 +28,13 @@
                 + "Nimi: " + responseJson.opintojakso.nimi + "<br>"
                 + "Tunnus: " + responseJson.opintojakso.tunnus + "<br>"
                 + "Opintopisteet: " + responseJson.opintojakso.opintopisteet + "<br>";
-                teksti = teksti + "<p>" + "Sisältö" + "<br>"
-                    + responseJson.sisalto(0);
+            teksti = teksti + "<p>" + "Sisältö" + "<br>"
+            for (var i = 0; i < responseJson.sisalto.length; i++) {
+                teksti = teksti + responseJson.sisalto[i] + "<br>";
+            }
+
+            teksti = teksti + "</p>";
+
             document.getElementById("vastaus").innerHTML = teksti;
         }
         fetch('https://valentinalehtonen.github.io/oma.JSON')
