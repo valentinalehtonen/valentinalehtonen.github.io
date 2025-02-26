@@ -23,8 +23,10 @@
             var teksti = "";
             teksti = "<h1>" + responseJson.otsikko + "<h1>";
             teksti = teksti + "<p>" + "<b>" + responseJson.kuvaus + "</b>" + "<br>";
-            teksti += "<img src='" + responseJson.kuva + "' alt='Kuva huoneesta' />";
-            teksti = teksti + "<p>" + responseJson.opintojakso.nimi + "<br>";
+            teksti = teksti + "<p>" + "<img src='" + responseJson.kuva + "' alt='Kuva huoneesta' />";
+            teksti = teksti + "<p>" + "Opintojakso: " + responseJson.opintojakso.nimi + "<br>"
+                + "Tunnus: " + responseJson.opintojakso.tunnus + "<br>"
+                + "Opintopisteet: " + responseJson.opintojakso.opintopisteet + "<br>";
             document.getElementById("vastaus").innerHTML = teksti;
         }
         fetch('https://valentinalehtonen.github.io/oma.JSON')
