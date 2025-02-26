@@ -55,15 +55,16 @@
                 + "Nimi: " + responseJson.opintojakso.nimi + "<br>"
                 + "Tunnus: " + responseJson.opintojakso.tunnus + "<br>"
                 + "Opintopisteet: " + responseJson.opintojakso.opintopisteet + "<br>";
-            teksti += "<p><b>" + "Sisältö:" + "</b></p><br>"
+            teksti += "<p><b>" + "Sisältö:" + "</b><br>"
             for (var i = 0; i < responseJson.sisalto.length; i++) {
                 teksti += responseJson.sisalto[i] + "<br>";
             }
             teksti += "</p>";
-            teksti += "<p><b>" + "Tekniikat:" + "</b></p><br>"
+            teksti += "<p><b>" + "Tekniikat:" + "</b><br>"
             for (var i = 0; i < responseJson.tekniikat.length; i++) {
                 teksti += responseJson.tekniikat[i].aihe + " (linkki: " + responseJson.tekniikat[i].linkki + ")" + "<br>";
             }
+            teksti += "</p>";
 
             document.getElementById("vastaus").innerHTML = teksti;
         }
