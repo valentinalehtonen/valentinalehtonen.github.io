@@ -1,0 +1,19 @@
+{
+    "nimi": "Digitekniikat",
+    "kesto": "8 viikkoa",
+    "kuva": "jsonkuva.jpg",
+    "pvm": {
+        "alku": "13.1.",
+        "loppu": "14.3.2025"
+    },
+    "osallistujat": {
+        "maara": 5,
+        "nimi": [
+            "Anna Aulanko",
+            "Leevi Leppänen",
+            "Maija Manninen",
+            "Olli Oksanen",
+            "Teuvo Teerikangas"
+        ]
+    }
+}

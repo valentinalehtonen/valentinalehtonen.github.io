@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html lang="fi">
+
+<head>
+
+    <title>JSON Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Calibri, sans-serif;
+        background-color: #ebdfdb;
+        color: #4E342E;
+    }
+
+    img {
+        max-width: 100%;
+    }
+</style>
+</head>
+
+<body>
+    <div id="vastaus">
+
+    </div>
+
+    <script>
+
+        function kerro(responseJson) {
+            var teksti = "";
+            teksti += "<h1>" + responseJson.nimi + "</h1>";
+            teksti += "<p>" + "<img src='" + responseJson.kuva + "' alt='Kuva tietokoneesta' />";
+            teksti += "<p><b>" + "Toteutuksen tiedot" + "</b></p>"
+                + "Kesto: " + responseJson.kesto + "<br>"
+                + "Suoritusaika: " + responseJson.pvm.alku + "-" + responseJson.pvm.loppu + "<br>"
+                + "Osallistujat (" + responseJson.osallistujat.maara + " hlö): " + "<br>";
+            for (var i = 0; i < responseJson.osallistujat.nimi.length; i++) {
+                teksti += responseJson.osallistujat.nimi[i] + "<br>";
+            }
+
+            document.getElementById("vastaus").innerHTML = teksti;
+        }
+        fetch('https://valentinalehtonen.github.io/toteutus.JSON')
+            .then(function (response) {
+                return response.json();
+            })
+
+            .then(function (responseJson) {
+                kerro(responseJson);
+            })
+
+            .catch(function (error) {
+                document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>";
+            })
+    </script>
+
+</body>
