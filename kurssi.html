@@ -11,7 +11,7 @@
 <style>
     body {
         font-family: Calibri, sans-serif;
-        background-color: #D7CCC8;
+        background-color: #ebdfdb;
         color: #4E342E;
     }
 </style>
@@ -33,14 +33,14 @@
                 + "Nimi: " + responseJson.opintojakso.nimi + "<br>"
                 + "Tunnus: " + responseJson.opintojakso.tunnus + "<br>"
                 + "Opintopisteet: " + responseJson.opintojakso.opintopisteet + "<br>";
-            teksti += "<p>" + "Sisältö" + "<br>"
+            teksti += "<p>" + "Sisältö:" + "<br>"
             for (var i = 0; i < responseJson.sisalto.length; i++) {
                 teksti += responseJson.sisalto[i] + "<br>";
             }
             teksti += "</p>";
-            teksti += "<p>" + "Tekniikat" + "<br>"
+            teksti += "<p>" + "Tekniikat:" + "<br>"
             for (var i = 0; i < responseJson.tekniikat.length; i++) {
-                teksti += responseJson.tekniikat[i].aihe + "<br>" + responseJson.tekniikat[i].linkki + "<br>";
+                teksti += responseJson.tekniikat[i].aihe + " (linkki: " + responseJson.tekniikat[i].linkki + ")" + "<br>";
             }
             teksti += "</p>";
 
