@@ -23,6 +23,8 @@
             var teksti = "";
             teksti = "<h1>" + responseJson.otsikko + "<h1>";
             teksti = teksti + "<p>" + "<b>" + responseJson.kuvaus + "</b>" + "<br>"
+            teksti = teksti + "<p>" + "<b>" + responseJson.kuva + "</b>" + "<br>"
+            teksti = teksti + "<p>" + "<b>" + responseJson.opintojakso.nimi + "</b>" + "<br>"
             document.getElementById("vastaus").innerHTML = teksti;
         }
         fetch('https://valentinalehtonen.github.io/oma.JSON')
