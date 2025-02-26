@@ -22,7 +22,8 @@
         function kerro(responseJson) {
             var teksti = "";
             teksti = "<h1>" + responseJson.otsikko + "<h1>";
-            teksti = teksti + "<p>" + "<b>" + responseJson.kuvaus + "</b>" + "<br>" + responseJson.kuva + "<br>";
+            teksti = teksti + "<p>" + "<b>" + responseJson.kuvaus + "</b>" + "<br>";
+            teksti += "<img src='" + responseJson.kuva + "' alt='Kuva huoneesta' />";
             teksti = teksti + "<p>" + responseJson.opintojakso.nimi + "<br>";
             document.getElementById("vastaus").innerHTML = teksti;
         }
