@@ -58,7 +58,7 @@
                 + "Kesto: " + responseJson.kesto + "<br>"
                 + "Suoritusaika: " + responseJson.pvm.alku + "-" + responseJson.pvm.loppu + "<br>"
             
-            teksti += + "<p>Osallistujat (" + responseJson.osallistujat.maara + " hlö): " + "<br>";
+            teksti += "<p>Osallistujat (" + responseJson.osallistujat.maara + " hlö): " + "<br>";
             for (var i = 0; i < responseJson.osallistujat.nimi.length; i++) {
                 teksti += responseJson.osallistujat.nimi[i] + "<br>";
             }
