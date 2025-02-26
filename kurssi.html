@@ -14,6 +14,10 @@
         background-color: #ebdfdb;
         color: #4E342E;
     }
+
+    img {
+        max-width: 100%;
+    }
 </style>
 </head>
 
@@ -33,16 +37,15 @@
                 + "Nimi: " + responseJson.opintojakso.nimi + "<br>"
                 + "Tunnus: " + responseJson.opintojakso.tunnus + "<br>"
                 + "Opintopisteet: " + responseJson.opintojakso.opintopisteet + "<br>";
-            teksti += "<p><b>" + "Sisältö:" + "</b><br>"
+            teksti += "<p><b>" + "Sisältö:" + "</b></p><br>"
             for (var i = 0; i < responseJson.sisalto.length; i++) {
                 teksti += responseJson.sisalto[i] + "<br>";
             }
             teksti += "</p>";
-            teksti += "<p><b>" + "Tekniikat:" + "</b><br>"
+            teksti += "<p><b>" + "Tekniikat:" + "</b></p><br>"
             for (var i = 0; i < responseJson.tekniikat.length; i++) {
                 teksti += responseJson.tekniikat[i].aihe + " (linkki: " + responseJson.tekniikat[i].linkki + ")" + "<br>";
             }
-            teksti += "</p>";
 
             document.getElementById("vastaus").innerHTML = teksti;
         }
