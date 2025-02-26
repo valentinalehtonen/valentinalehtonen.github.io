@@ -49,7 +49,7 @@
         function kerro(responseJson) {
             var teksti = "";
             teksti += "<h1>" + responseJson.nimi + "</h1>";
-            teksti += "<p>" + "<img src='" + responseJson.kuva + "' alt='Kuva tietokoneesta' />";
+            teksti += "<p>" + "<img src='" + responseJson.kuva + "' alt='Kuva tietokoneesta' />" + "</p>";
             teksti += "<p><b>" + "Toteutuksen tiedot" + "</b></p>"
                 + "Kesto: " + responseJson.kesto + "<br>"
                 + "Suoritusaika: " + responseJson.pvm.alku + "-" + responseJson.pvm.loppu + "<br>"
