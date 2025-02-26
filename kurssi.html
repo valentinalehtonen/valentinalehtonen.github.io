@@ -52,9 +52,9 @@
             teksti += "<p>" + "<b>" + responseJson.kuvaus + "</b>" + "<br>";
             teksti += "<p>" + "<img src='" + responseJson.kuva + "' alt='Kuva huoneesta' />";
             teksti += "<p><b>" + "Opintojakso" + "</b></p>"
-                + "Nimi: " + responseJson.opintojakso.nimi + "<br>"
+                + "<p>" + "Nimi: " + responseJson.opintojakso.nimi + "<br>"
                 + "Tunnus: " + responseJson.opintojakso.tunnus + "<br>"
-                + "Opintopisteet: " + responseJson.opintojakso.opintopisteet + "<br>";
+                + "Opintopisteet: " + responseJson.opintojakso.opintopisteet + "</p><br>";
             teksti += "<p><b>" + "Sisältö:" + "</b><br>"
             for (var i = 0; i < responseJson.sisalto.length; i++) {
                 teksti += responseJson.sisalto[i] + "<br>";
