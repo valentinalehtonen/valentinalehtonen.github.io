@@ -21,23 +21,23 @@
 
         function kerro(responseJson) {
             var teksti = "";
-            teksti = "<h1>" + responseJson.otsikko + "<h1>";
-            teksti = teksti + "<p>" + "<b>" + responseJson.kuvaus + "</b>" + "<br>";
-            teksti = teksti + "<p>" + "<img src='" + responseJson.kuva + "' alt='Kuva huoneesta' />";
-            teksti = teksti + "<p>" + "Opintojakso" + "<br>"
+            teksti += "<h1>" + responseJson.otsikko + "</h1>";
+            teksti += "<p>" + "<b>" + responseJson.kuvaus + "</b>" + "<br>";
+            teksti += "<p>" + "<img src='" + responseJson.kuva + "' alt='Kuva huoneesta' />";
+            teksti += "<p>" + "Opintojakso" + "<br>"
                 + "Nimi: " + responseJson.opintojakso.nimi + "<br>"
                 + "Tunnus: " + responseJson.opintojakso.tunnus + "<br>"
                 + "Opintopisteet: " + responseJson.opintojakso.opintopisteet + "<br>";
-            teksti = teksti + "<p>" + "Sisältö" + "<br>"
+            teksti += "<p>" + "Sisältö" + "<br>"
             for (var i = 0; i < responseJson.sisalto.length; i++) {
-                teksti = teksti + responseJson.sisalto[i] + "<br>";
+                teksti += responseJson.sisalto[i] + "<br>";
             }
-            teksti = teksti + "</p>";
-            teksti = teksti + "<p>" + "Tekniikat" + "<br>"
+            teksti += "</p>";
+            teksti += "<p>" + "Tekniikat" + "<br>"
             for (var i = 0; i < responseJson.tekniikat.length; i++) {
-                teksti = teksti + responseJson.tekniikat[i].aihe + "<br>" + responseJson.tekniikat[i].linkki + "<br>";
+                teksti += responseJson.tekniikat[i].aihe + "<br>" + responseJson.tekniikat[i].linkki + "<br>";
             }
-            teksti = teksti + "</p>";
+            teksti += "</p>";
 
             document.getElementById("vastaus").innerHTML = teksti;
         }
