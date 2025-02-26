@@ -62,7 +62,8 @@
             teksti += "</p>";
             teksti += "<p><b>" + "Tekniikat:" + "</b><br>"
             for (var i = 0; i < responseJson.tekniikat.length; i++) {
-                teksti += responseJson.tekniikat[i].aihe + " (linkki: " + responseJson.tekniikat[i].linkki + ")" + "<br>";
+                teksti += responseJson.tekniikat[i].aihe + " (linkki: <a href='" + responseJson.tekniikat[i].linkki
+                + "'target='_blank'>" + responseJson.tekniikat[i].linkki + "</a>)" + "<br>";
             }
             teksti += "</p>";
 
