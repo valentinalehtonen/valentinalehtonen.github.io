@@ -14,10 +14,29 @@
 
 <body>
     <div id="vastaus">
-        <script>
-            
-        </script>
 
     </div>
+
+    <script>
+
+        function kerro(responseJson) {
+            var teksti = "";
+            teksti = "<h1>" + data.otsikko + "<h1>";
+            teksti = teksti + "<p>" + "<b>" + data.kuvaus + "</b>" + "<br>"
+            document.getElementById("vastaus").innerHTML = teksti;
+        }
+        fetch('https://valentinalehtonen.github.io/oma.JSON')
+            .then(function (response) {
+                return response.json();
+            })
+
+            .then(function (responseJson) {
+                kerro(responseJson);
+            })
+
+            .catch(function (error) {
+                document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>";
+            })
+    </script>
 
 </body>
