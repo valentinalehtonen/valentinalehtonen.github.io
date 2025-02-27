@@ -31,6 +31,7 @@
         #vastaus {
             display: flex;
             gap: 20px;
+            background-color: #fbf0ec;
         }
 
     </style>
@@ -60,13 +61,13 @@
     <script>
 
         function kerro(responseJson, kaupunki) {
-            var teksti = "";
-            teksti += "<p>Kaupunki: " + responseJson.name + "<br>";
-            teksti += "Sää: " + responseJson.weather[0].description + "<br>"
-            teksti += "Lämpötila: " + responseJson.main.temp + "°C<br>";
-            teksti += "Tuulen nopeus: " + responseJson.wind.speed + " m/s<br>";
-            teksti += "<img src='http://openweathermap.org/img/wn/" + responseJson.weather[0].icon + ".png' alt='Sääikoni'><br>";
-            teksti += "</p>";
+            var teksti = "<ul>";
+            teksti += "<li>Kaupunki: " + responseJson.name + "</li>";
+            teksti += "<li>Sää: " + responseJson.weather[0].description + "</li>";
+            teksti += "<li>Lämpötila: " + responseJson.main.temp + "°C</li>";
+            teksti += "<li>Tuulen nopeus: " + responseJson.wind.speed + " m/s</li>";
+            teksti += "<li><img src='http://openweathermap.org/img/wn/" + responseJson.weather[0].icon + ".png' alt='Sääikoni'></li>";
+            teksti += "</ul>";
 
             document.getElementById("vastaus").innerHTML += teksti;
         }
