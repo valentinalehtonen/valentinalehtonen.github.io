@@ -59,8 +59,8 @@
 
             teksti += "<p>Kaupunki: " + responseJson.name + "<br>";
             teksti += "Sää: " + responseJson.weather[0].description + "<br>"
-            teksti += "Lämpötila: " + responseJson.main.temp + "<br>";
-            teksti += "Tuulen nopeus: " + responseJson.wind.speed + "<br>";
+            teksti += "Lämpötila: " + responseJson.main.temp + "°C<br>";
+            teksti += "Tuulen nopeus: " + responseJson.wind.speed + " m/s<br>";
             teksti += "<img src='http://openweathermap.org/img/wn/" + responseJson.weather[0].icon + ".png' alt='Sääikoni'><br>";
             teksti += "</p>";
 
