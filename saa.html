@@ -31,6 +31,7 @@
         #vastaus {
             display: flex;
             gap: 20px;
+            padding-top: 20px;
             background-color: #fbf0ec;
         }
 
@@ -66,7 +67,8 @@
             teksti += "<li>Sää: " + responseJson.weather[0].description + "</li>";
             teksti += "<li>Lämpötila: " + responseJson.main.temp + "°C</li>";
             teksti += "<li>Tuulen nopeus: " + responseJson.wind.speed + " m/s</li>";
-            teksti += "<li><img src='http://openweathermap.org/img/wn/" + responseJson.weather[0].icon + ".png' alt='Sääikoni'></li>";
+            teksti += "</ul>";
+            teksti += "<img src='http://openweathermap.org/img/wn/" + responseJson.weather[0].icon + ".png' alt='Sääikoni'>";
             teksti += "</ul>";
 
             document.getElementById("vastaus").innerHTML += teksti;
