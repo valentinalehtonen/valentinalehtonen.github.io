@@ -27,6 +27,12 @@
             max-width: 100%;
             height: auto;
         }
+
+        #vastaus {
+            display: flex;
+            gap: 20px;
+        }
+
     </style>
 </head>
 
@@ -55,8 +61,6 @@
 
         function kerro(responseJson, kaupunki) {
             var teksti = "";
-            teksti += "<h1>Säätiedot</h1>";
-
             teksti += "<p>Kaupunki: " + responseJson.name + "<br>";
             teksti += "Sää: " + responseJson.weather[0].description + "<br>"
             teksti += "Lämpötila: " + responseJson.main.temp + "°C<br>";
