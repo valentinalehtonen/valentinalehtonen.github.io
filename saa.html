@@ -79,6 +79,21 @@
             .catch(function (error) {
                 document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>";
             })
+
+            fetch('https://api.openweathermap.org/data/2.5/weather?q=Tampere&appid=665ecd56dfc08dbb50feb8b8f5034e28')
+            .then(function (response) {
+                return response.json();
+            })
+
+            .then(function (responseJson) {
+                console.log(responseJson);
+                kerro(responseJson);
+            })
+
+            .catch(function (error) {
+                document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>";
+            })
+
     </script>
 
 </body>
