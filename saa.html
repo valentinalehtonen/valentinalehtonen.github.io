@@ -55,21 +55,14 @@
 
         function kerro(responseJson) {
             var teksti = "";
-            teksti += "<h1>" + responseJson.nimi + "</h1>";
-            teksti += "<p>" + "<img src='" + responseJson.kuva + "' alt='Kuva tietokoneesta' />" + "</p>";
-            teksti += "<p><b>Toteutuksen tiedot</b></p>"
-                + "Kesto: " + responseJson.kesto + "<br>"
-                + "Suoritusaika: " + responseJson.pvm.alku + "-" + responseJson.pvm.loppu + "<br>"
-            
-            teksti += "<p>Osallistujat (" + responseJson.osallistujat.maara + " hlö): " + "<br>";
-            for (var i = 0; i < responseJson.osallistujat.nimi.length; i++) {
-                teksti += responseJson.osallistujat.nimi[i] + "<br>";
-            }
+            teksti += "<h1>Säätiedot</h1>";
+
+            teksti += "<p>Kaupunki: " + responseJson.city + "<br>";
             teksti += "</p>";
 
             document.getElementById("vastaus").innerHTML = teksti;
         }
-        fetch('https://valentinalehtonen.github.io/toteutus.JSON')
+        fetch('https://api.openweathermap.org/data/2.5/weather?q=Helsinki&appid=665ecd56dfc08dbb50feb8b8f5034e2&units=metric')
             .then(function (response) {
                 return response.json();
             })
