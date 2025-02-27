@@ -55,21 +55,17 @@
 
         function kerro(responseJson) {
             var teksti = "";
-            teksti += "<h1>" + responseJson.nimi + "</h1>";
-            teksti += "<p>" + "<img src='" + responseJson.kuva + "' alt='Kuva tietokoneesta' />" + "</p>";
-            teksti += "<p><b>Toteutuksen tiedot</b></p>"
-                + "Kesto: " + responseJson.kesto + "<br>"
-                + "Suoritusaika: " + responseJson.pvm.alku + "-" + responseJson.pvm.loppu + "<br>"
-            
-            teksti += "<p>Osallistujat (" + responseJson.osallistujat.maara + " hlö): " + "<br>";
-            for (var i = 0; i < responseJson.osallistujat.nimi.length; i++) {
-                teksti += responseJson.osallistujat.nimi[i] + "<br>";
+            teksti = "<h1>Tampereella tapahtuu</h1>";
+
+            for (var i = 0; i < responseJson.length; i++) {
+                teksti += "<h3>" + responseJson[i].name + "</h3>";
+                teksti += "<p>" + responseJson[i].description + "</p>";
+                teksti += "<p> <a href="+ responseJson[i].url + ">" + responseJson[i].url + "</a></p>";
             }
-            teksti += "</p>";
 
             document.getElementById("vastaus").innerHTML = teksti;
         }
-        fetch('https://valentinalehtonen.github.io/toteutus.JSON')
+        fetch('https://api.visittampere.com/api/v1/visittampere/event/published/all/?for mat=json&lang=fi')
             .then(function (response) {
                 return response.json();
             })
