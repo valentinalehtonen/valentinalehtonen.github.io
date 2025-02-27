@@ -58,7 +58,7 @@
             teksti = "<h1>Tampereella tapahtuu</h1>";
 
             for (var i = 0; i < responseJson.length; i++) {
-                teksti += "<h3>" + responseJson[i].name + "</h3>";
+                teksti += "<h3>" + responseJson[i].title + "</h3>";
                 teksti += "<p>" + responseJson[i].description + "</p>";
                 teksti += "<p> <a href="+ responseJson[i].url + ">" + responseJson[i].url + "</a></p>";
             }
