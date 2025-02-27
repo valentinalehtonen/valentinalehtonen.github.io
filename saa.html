@@ -57,7 +57,8 @@
             var teksti = "";
             teksti += "<h1>Säätiedot</h1>";
 
-            teksti += "<p>Kaupunki: " + responseJson.city + "<br>";
+            teksti += "<p>Kaupunki: " + responseJson.cityName + "<br>";
+                teksti += "Sää: " + responseJson.weatherDescription + "<br>"
             teksti += "</p>";
 
             document.getElementById("vastaus").innerHTML = teksti;
