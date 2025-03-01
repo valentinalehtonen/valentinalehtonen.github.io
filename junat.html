@@ -84,17 +84,14 @@
         fetch('https://rata.digitraffic.fi/api/v1/live-trains/station/HKI?departing_trains=10&include_nonstopping=false')
 
             .then(function (response) {
-                console.log("Fetch response status:", response.status);
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
                 return response.json();
             })
             .then(function (responseJson) {
                 console.log(responseJson);
                 kerro(responseJson);
             })
-            .catch(function () {
+            .catch(function (error) {
+                console.error("Fetch error:", error); 
                 document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>";
             });
     </script>
