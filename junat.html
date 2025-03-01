@@ -68,11 +68,9 @@
                     for (var j = 0; j < responseJson[i].timeTableRows.length; j++) {
                         if (responseJson[i].timeTableRows[j].stationShortCode == "TPE" && responseJson[i].timeTableRows[j].type == "DEPARTURE") {
                             var pvm = responseJson[i].timeTableRows[j].scheduledTime;
-                            var aika = pvm.substr(0, 10) + " kello: " + pvm.substr(11, 5);
+                            var aika = "kello: " + pvm.substr(11, 5);
 
                             document.getElementById("vastaus").innerHTML += "<b>Juna " + responseJson[i].trainNumber + "</b><br>Lähtöaika: " + aika;
-                            break;
-
                         }
                     }
                 }
