@@ -55,7 +55,7 @@
 
     <script>
         function kerro(responseJson) {
-            document.getElementById("vastaus").innerHTML = "<h1>Matka Tampereelle junalla</h1><br>";
+            document.getElementById("vastaus").innerHTML = "<h1>Matka Tampereelle junalla</h1><br>Seuraavat junat Helsingistä Tampereelle:<br>";
 
             for (var i = 0; i < responseJson.length; i++) {
 
@@ -70,7 +70,7 @@
                             var pvm = responseJson[i].timeTableRows[j].scheduledTime;
                             var aika = "kello: " + pvm.substr(11, 5);
 
-                            document.getElementById("vastaus").innerHTML += "<b>Juna " + responseJson[i].trainNumber + "</b><br>Lähtöaika: " + aika + "Määräasema: Helsinki<br>";
+                            document.getElementById("vastaus").innerHTML += "<p><b>Juna " + responseJson[i].trainNumber + "</b><br>Lähtöaika: " + aika + "<br>Määränpää: Helsinki<br></p>";
                         }
                     }
                 }
