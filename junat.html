@@ -54,31 +54,36 @@
     </div>
 
     <script>
-
         function kerro(responseJson) {
-            var teksti = "";
-            teksti = "<h1>Tampereella tapahtuu</h1>";
+            document.getElementById("vastaus").innerHTML = "<h1>Matka Tampereelle junalla</h1><br>";
 
-            for (var i = 0; i < responseJson.length; i++) {
-                teksti += "<h3>" + responseJson[i].title + "</h3>";
-                teksti += "<p>" + responseJson[i].description + "</p>";
-                teksti += "<p> <a href="+ responseJson[i].url + ">" + responseJson[i].url + "</a></p>";
+            for (var i = 0; i < responseJson.presets.length; i++) {
+                fetch(`https://tie.digitraffic.fi/api/weathercam/v1/stations/${responseJson.presets[i].id}/history`)
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (kuva) {
+                        document.getElementById("vastaus").innerHTML +=
+                            "<b>" + (kuva.history[0]?.dataUpdatedTime || "Ei saatavilla") + "</b><br>" +
+                            `<img src="${kuva.history[0]?.imageUrl || ""}" alt="Liikennekameran kuva"/><br>`;
+                    })
+                    .catch(function () {
+                        document.getElementById("vastaus").innerHTML += "<p>Kuvaa ei pystytä hakemaan</p>";
+                    });
             }
-
-            document.getElementById("vastaus").innerHTML = teksti;
         }
-        fetch('https://api.visittampere.com/api/v1/visittampere/event/published/all/?for mat=json&lang=fi')
+
+        fetch('https://tie.digitraffic.fi/api/weathercam/v1/stations/C04507/data')
             .then(function (response) {
                 return response.json();
             })
-
             .then(function (responseJson) {
+                console.log(responseJson);
                 kerro(responseJson);
             })
-
-            .catch(function (error) {
+            .catch(function () {
                 document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>";
-            })
+            });
     </script>
 
 </body>
