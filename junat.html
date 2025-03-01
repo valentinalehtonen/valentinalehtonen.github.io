@@ -55,14 +55,11 @@
 
     <script>
         function kerro(responseJson) {
-            console.log("Data received: " + responseJson);
             document.getElementById("vastaus").innerHTML = "<h1>Matka Tampereelle junalla</h1><br>";
-
-            console.log("Junia yhteensä: " + responseJson.length());
 
             for (var i = 0; i < responseJson.length; i++) {
 
-                console.log("Etsitään: " + responseJson[i].trainNumber + responseJson[i].trainCategory);
+                console.log("Etsitään: " + responseJson[i] + responseJson[i].trainNumber + responseJson[i].trainCategory);
 
                 if (responseJson[i].trainCategory == "Long-distance") {
 
