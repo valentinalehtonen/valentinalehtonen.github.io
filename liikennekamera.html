@@ -58,14 +58,17 @@
             document.getElementById("vastaus").innerHTML = "<h1>Autolla Tampereelle</h1><br>Minkälainen keli siellä on?<br>";
 
             for (var i = 0; i < responseJson.presets.length; i++) {
-                fetch(`https://tie.digitraffic.fi/api/weathercam/v1/stations/${responseJson.presets[i].id}/history`)
+                let kameraId = responseJson.presets[i].id;
+                let measuredTime = responseJson.presets[i].measuredTime;
+
+                fetch(`https://tie.digitraffic.fi/api/weathercam/v1/stations/${kameraId}/history`)
                     .then(function (response) {
                         return response.json();
                     })
-                    .then(function (kuva) {
+                    .then(function (kuvaJson) {
                         document.getElementById("vastaus").innerHTML +=
-                            "<b>" + (kuva.dataUpdatedTime || "Ei saatavilla") + "</b><br>" +
-                            `<img src="${kuva.history[0].imageUrl || ""}" alt="Liikennekameran kuva"/><br>`;
+                            measuredTime + "<br>" +
+                            `<img src="${kuvaJson.presets[0].history[0].imageUrl}" alt="Liikennekameran kuva"/><br>`;
                     })
                     .catch(function () {
                         document.getElementById("vastaus").innerHTML += "<p>Kuvaa ei pystytä hakemaan</p>";
