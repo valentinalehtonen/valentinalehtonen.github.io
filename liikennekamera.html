@@ -55,7 +55,7 @@
 
     <script>
         function kerro(responseJson) {
-            document.getElementById("vastaus").innerHTML = "<h1>Autolla Tampereelle</h1><br>Minkälainen keli siellä on?<br>";
+            document.getElementById("vastaus").innerHTML = "<h1>Autolla Tampereelle</h1><br>Minkälainen keli siellä on?<br><br>";
 
             for (var i = 0; i < responseJson.presets.length; i++) {
                 let kameraId = responseJson.presets[i].id;
