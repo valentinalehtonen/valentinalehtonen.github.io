@@ -68,7 +68,7 @@
                     .then(function (kuvaJson) {
                         document.getElementById("vastaus").innerHTML +=
                             measuredTime + "<br>" +
-                            `<img src="${kuvaJson.presets[0].history[0].imageUrl}" alt="Liikennekameran kuva"/><br>`;
+                            `<img src="${kuvaJson.presets[0].history[0].imageUrl}" alt="Liikennekameran kuva"/><br><br>`;
                     })
                     .catch(function () {
                         document.getElementById("vastaus").innerHTML += "<p>Kuvaa ei pystytä hakemaan</p>";
