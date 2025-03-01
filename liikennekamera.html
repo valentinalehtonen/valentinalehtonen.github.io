@@ -64,8 +64,8 @@
                     })
                     .then(function (kuva) {
                         document.getElementById("vastaus").innerHTML +=
-                            "<b>" + (kuva.history[0]?.dataUpdatedTime || "Ei saatavilla") + "</b><br>" +
-                            `<img src="${kuva.history[0]?.imageUrl || ""}" alt="Liikennekameran kuva"/><br>`;
+                            "<b>" + (kuva.dataUpdatedTime || "Ei saatavilla") + "</b><br>" +
+                            `<img src="${kuva.history[0].imageUrl || ""}" alt="Liikennekameran kuva"/><br>`;
                     })
                     .catch(function () {
                         document.getElementById("vastaus").innerHTML += "<p>Kuvaa ei pystytä hakemaan</p>";
