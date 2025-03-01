@@ -62,7 +62,7 @@
                     for (var j = 0; responseJson[i].timeTableRows.length; j++) {
                         if (data[i].timeTableRows[j].stationShortCode == "TPE" && data[i].timeTableRows[j].type == "DEPARTURE") {
 
-                            document.getElementById("vastaus").innerHTML += "Juna";
+                            document.getElementById("vastaus").innerHTML += "<b>Juna</b><br>" + responseJson[i].trainNumber;
                             break;
 
                         }
