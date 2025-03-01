@@ -59,9 +59,9 @@
 
             for (var i = 0; i < responseJson.length; i++) {
                 if (responseJson[i].trainCategory == "Long-distance") {
-                    for (var j = 0; responseJson[i].timeTableRows.length; j++) {
-                        if (data[i].timeTableRows[j].stationShortCode == "TPE" && data[i].timeTableRows[j].type == "DEPARTURE") {
-                            document.getElementById("vastaus").innerHTML += "<b>Juna" + responseJson[i].trainNumber + "</b><br>";
+                    for (var j = 0; j < responseJson[i].timeTableRows.length; j++) {
+                        if (responseJson[i].timeTableRows[j].stationShortCode == "TPE" && responseJson[i].timeTableRows[j].type == "DEPARTURE") {
+                            document.getElementById("vastaus").innerHTML += "<b>Juna " + responseJson[i].trainNumber + "</b><br>";
                             break;
 
                         }
