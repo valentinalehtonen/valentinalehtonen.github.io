@@ -67,12 +67,12 @@
                     return response.json();
                 })
                 .then(function (kuva){
-                    document.getElementById("vastaus").innerHTML += "<b>" + responseJson.presets[0].dataUpdatedTime + "</b><br>";
-                    document.getElementById("vastaus").innerHTML += `<img src="${responseJson.presets[0].history[0].imageUrl}" alt="Liikennekameran kuva"/><br>`;
+                    document.getElementById("vastaus").innerHTML += "<b>" + responseJson.presets[i].dataUpdatedTime + "</b><br>";
+                    document.getElementById("vastaus").innerHTML += `<img src="${responseJson.presets[i].history[0].imageUrl}" alt="Liikennekameran kuva"/><br>`;
                 })
 
                 .catch(function (error) {
-                    document.getElementById("vastaus").innerHTML = "<p>Kuvaa ei pystytä hakemaan</p>";
+                    document.getElementById("vastaus").innerHTML += "<p>Kuvaa ei pystytä hakemaan</p>";
 
                 })
             }
