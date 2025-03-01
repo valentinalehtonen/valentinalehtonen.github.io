@@ -55,6 +55,7 @@
 
     <script>
         function kerro(responseJson) {
+            console.log("Data received: " + responseJson);
             document.getElementById("vastaus").innerHTML = "<h1>Matka Tampereelle junalla</h1><br>";
 
             console.log("Junia yhteensä: " + responseJson.length());
@@ -84,10 +85,10 @@
         fetch('https://rata.digitraffic.fi/api/v1/live-trains/station/HKI?departing_trains=10&include_nonstopping=false')
 
             .then(function (response) {
+                console.log("Response: " + response);
                 return response.json();
             })
             .then(function (responseJson) {
-                console.log(responseJson);
                 kerro(responseJson);
             })
             .catch(function (error) {
