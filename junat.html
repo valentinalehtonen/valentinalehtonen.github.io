@@ -59,12 +59,6 @@
 
             for (var i = 0; i < responseJson.length; i++) {
 
-                console.log("Etsitään: " + responseJson[i] + responseJson[i].trainNumber + responseJson[i].trainCategory);
-
-                if (responseJson[i].trainCategory == "Long-distance") {
-
-                    console.log("Kaukojuna: " + responseJson[i].trainNumber);
-
                     for (var j = 0; j < responseJson[i].timeTableRows.length; j++) {
                         if (responseJson[i].timeTableRows[j].stationShortCode == "TPE" && responseJson[i].timeTableRows[j].type == "DEPARTURE") {
                             var pvm = responseJson[i].timeTableRows[j].scheduledTime;
@@ -75,21 +69,19 @@
 
                         }
                     }
-                }
+                
             }
         }
 
         fetch('https://rata.digitraffic.fi/api/v1/live-trains/station/HKI?departing_trains=10&include_nonstopping=false')
 
             .then(function (response) {
-                console.log("Response: " + response);
                 return response.json();
             })
             .then(function (responseJson) {
                 kerro(responseJson);
             })
             .catch(function (error) {
-                console.error("Fetch error:", error); 
                 document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>";
             });
     </script>
