@@ -60,7 +60,7 @@
             teksti = "<h1>Autolla Tampereelle</h1><br>Minkälainen keli siellä on?<br>";
 
             for (var i = 0; i < responseJson.length; i++) {
-                teksti += "<h3>" + rresponseJson.presets[i].measuredTime + "</h3>";
+                teksti += "<h3>" + responseJson.presets[i].measuredTime + "</h3>";
             }
 
             document.getElementById("vastaus").innerHTML = teksti;
