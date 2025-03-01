@@ -57,7 +57,12 @@
         function kerro(responseJson) {
             document.getElementById("vastaus").innerHTML = "<h1>Matka Tampereelle junalla</h1><br>";
 
+            console.log("Junia yhteensä: " + responseJson.length());
+
             for (var i = 0; i < responseJson.length; i++) {
+                
+                console.log("Etsitään: " + responseJson[i].trainNumber + responseJson[i].trainCategory);
+
                 if (responseJson[i].trainCategory == "Long-distance") {
                     for (var j = 0; j < responseJson[i].timeTableRows.length; j++) {
                         if (responseJson[i].timeTableRows[j].stationShortCode == "TPE" && responseJson[i].timeTableRows[j].type == "DEPARTURE") {
