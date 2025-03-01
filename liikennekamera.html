@@ -60,7 +60,17 @@
             teksti = "<h1>Autolla Tampereelle</h1><br>Minkälainen keli siellä on?<br>";
 
             for (var i = 0; i < responseJson.presets.length; i++) {
-                teksti += "<h3>" + responseJson.presets[i].measuredTime + "</h3>";
+                teksti += "<b>" + responseJson.presets[i].measuredTime + "</b><br>";
+
+                var kuva = null;
+                for (var j = 0; j < responseJson.presets[i].history.length; j++) {
+                    if (responseJson.presets[i].history[j].lastModified == responseJson.presets[i].measuredTime) {
+                        kuva = responseJson.presets[i].history[j];
+                        break;
+                    }
+                }
+
+                teksti += "<img src='" + kuva.imageUrl + "' alt='Liikennekameran kuva'/><br>";
             }
 
             document.getElementById("vastaus").innerHTML = teksti;
