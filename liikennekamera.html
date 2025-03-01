@@ -60,11 +60,11 @@
             teksti = "<h1>Autolla Tampereelle</h1><br>Minkälainen keli siellä on?<br>";
 
             for (var i = 0; i < responseJson.presets.length; i++) {
-                teksti += "<b>" + responseJson.presets[i].measuredTime + "</b><br>";
+                teksti += "<b>" + responseJson.presets[i].dataUpdatedTime + "</b><br>";
 
                 var kuva = null;
                 for (var j = 0; j < responseJson.presets[i].history.length; j++) {
-                    if (responseJson.presets[i].history[j].lastModified == responseJson.presets[i].measuredTime) {
+                    if (responseJson.presets[i].history[j].lastModified == responseJson.presets[i].dataUpdatedTime) {
                         kuva = responseJson.presets[i].history[j];
                         break;
                     }
