@@ -59,28 +59,29 @@
 
             for (var i = 0; i < responseJson.length; i++) {
                 if (responseJson[i].trainCategory == "Long-distance") {
-                    for (var j = 0; responseJson[i].timeTableRows.length; j++) { }
-                    if (data[i].timeTableRows[j].stationShortCode == "TPE" && data[i].timeTableRows[j].type == "DEPARTURE") {
+                    for (var j = 0; responseJson[i].timeTableRows.length; j++) {
+                        if (data[i].timeTableRows[j].stationShortCode == "TPE" && data[i].timeTableRows[j].type == "DEPARTURE") {
 
-                        document.getElementById("vastaus").innerHTML += "Juna";
-                        break;
+                            document.getElementById("vastaus").innerHTML += "Juna";
+                            break;
 
+                        }
                     }
                 }
             }
         }
 
-            fetch('https://rata.digitraffic.fi/api/v1/live-trains/station/HKI?departing_trains=10&include_nonstopping=false')
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (responseJson) {
-                    console.log(responseJson);
-                    kerro(responseJson);
-                })
-                .catch(function () {
-                    document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>";
-                });
+        fetch('https://rata.digitraffic.fi/api/v1/live-trains/station/HKI?departing_trains=10&include_nonstopping=false')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (responseJson) {
+                console.log(responseJson);
+                kerro(responseJson);
+            })
+            .catch(function () {
+                document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>";
+            });
     </script>
 
 </body>
