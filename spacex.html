@@ -46,35 +46,37 @@
         </div>
     </nav>
 
-    <div class="container d-lfex flex-column justify-content-center align-items-center text-center mt-4">
-        <h2>Information on SpaceX Rocket Launches</h2>
-        <p>This webpage displays information on previous and upcoming SpaceX launches.</p>
-        <p>You can view upcoming launches including launch date and time, rocket type and mission details from our <a
-                href="upcoming.html" style="text-decoration: none; color: #939ea8">Upcoming launches page</a>. To browse
-            past launches take a look at our <a href="archive.html" style="text-decoration: none; color: #939ea8">Past
-                launch archive.</a> </p>
-    </div>
-
-    <div class="container d-flex flex-column justify-content-center align-items-center text-center mt-4">
-        <div id="vastaus">
-            <div class="container mt-5">
-                <h2 class="text-center text-white">Past Launches</h2>
-                <div id="launchCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner" id="carousel-content">
+    <div class="container-fluid p-4 d-flex flex-column justify-content-center align-items-center">
+        <div class="d-flex flex-column justify-content-center align-items-center text-center mt-4">
+            <h2>Information on SpaceX Rocket Launches</h2>
+            <p>This webpage displays information on previous and upcoming SpaceX launches.</p>
+            <p>You can view upcoming launches including launch date and time, rocket type and mission details from our 
+                <a href="upcoming.html" style="text-decoration: none; color: #939ea8">Upcoming launches page</a>. 
+                To browse past launches, take a look at our 
+                <a href="archive.html" style="text-decoration: none; color: #939ea8">Past launch archive.</a> 
+            </p>
+        </div>
+    
+        <div class="d-flex flex-column justify-content-center align-items-center text-center mt-4">
+            <div id="vastaus">
+                <div class="mt-5">
+                    <h2 class="text-center text-white">Past Launches</h2>
+                    <div id="launchCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner" id="carousel-content">
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#launchCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#launchCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#launchCarousel"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#launchCarousel"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
                 </div>
             </div>
         </div>
+    </div>
 
         <div class="container-fluid p-4 bg-dark text-white text-center mt-4">
             <ul class="nav justify-content-center">
