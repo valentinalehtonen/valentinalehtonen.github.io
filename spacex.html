@@ -8,14 +8,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-        .fakeimg {
-            height: 200px;
-            background: #aaa;
-        }
-
         body {
             background-color: black;
             color: white;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -23,7 +24,7 @@
 <body>
 
     <div class="p-5 bg-black text-white text-center">
-        <a href="spacex.html">
+        <a href="spacex.html" style="text-decoration: none; color: white;">
             <h1>SpaceX Rocket Launches</h1>
         </a>
         <p>Upcoming launch data and past launch archive</p>
@@ -54,6 +55,22 @@
         <a id="more-info" href="#" class="btn btn-primary mt-3" target="_blank">More Info</a>
     </div>
 
+    <div class="container mt-5">
+        <h2 class="text-center text-white">Past Launches</h2>
+        <div id="launchCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" id="carousel-content">
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#launchCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#launchCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
     <div class="container-fluid p-4 bg-dark text-white text-center mt-4">
         <ul class="nav justify-content-center">
             <li class="nav-item">
@@ -69,6 +86,7 @@
     </div>
 
     <script>
+
         function fetchLaunch() {
 
             fetch('https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=1')
@@ -81,10 +99,11 @@
                         var launch = data.results[0];
                         var launchTime = new Date(launch.window_start).getTime();
                         document.getElementById("launch-name").innerText = launch.name;
-                        document.getElementById("more-info").href = launch.vid_urls?.[0] || "#";
 
                         updateCountdown(launchTime);
-                        setInterval(() => updateCountdown(launchTime), 1000);
+                        setInterval(function () {
+                            updateCountdown(launchTime);
+                        }, 1000);
                     } else {
                         document.getElementById("countdown").innerText = "No upcoming launches found.";
                     }
@@ -112,7 +131,42 @@
             document.getElementById("countdown").innerText = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
         }
 
+        function fetchPastLaunches() {
+            fetch('https://lldev.thespacedevs.com/2.2.0/launch/previous/?limit=3')
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    var carouselContent = document.getElementById('carousel-content');
+                    carouselContent.innerHTML = '';
+
+                    if (data.results.length > 0) {
+                        data.results.forEach(function (launch, index) {
+                            var imageUrl = launch.image ? launch.image : "https://via.placeholder.com/500";
+                            var activeClass = index === 0 ? 'active' : '';
+
+                            var carouselItem =
+                                '<div class="carousel-item ' + activeClass + '">' +
+                                '<img src="' + imageUrl + '" class="d-block w-100" alt="Launch Image">' +
+                                '<div class="carousel-caption d-none d-md-block">' +
+                                '<h5>' + launch.name + '</h5>' +
+                                '<p>' + new Date(launch.window_start).toLocaleString('fi-FI') + '</p>' +
+                                '</div>' +
+                                '</div>';
+                            carouselContent.innerHTML += carouselItem;
+                        });
+                    } else {
+                        carouselContent.innerHTML = '<p>No past launches found.</p>';
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error fetching past launches:', error);
+                    document.getElementById('carousel-content').innerHTML = '<p class="text-danger">Failed to load past launches.</p>';
+                });
+        }
+
         fetchLaunch();
+        fetchPastLaunches();
 
     </script>
 
