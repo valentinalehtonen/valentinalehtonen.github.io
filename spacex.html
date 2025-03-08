@@ -14,9 +14,18 @@
         }
 
         .carousel-item img {
-            width: 100%;
+            width: 33.33%;
             height: 300px;
             object-fit: cover;
+        }
+
+        .carousel-inner {
+            display: flex;
+        }
+
+        .carousel-inner>.carousel-item {
+            display: flex;
+            flex-direction: row;
         }
     </style>
 </head>
@@ -60,11 +69,11 @@
         <div id="launchCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner" id="carousel-content">
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#launchCarousel" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" id="prevBtn">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#launchCarousel" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" id="nextBtn">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
@@ -86,27 +95,20 @@
     </div>
 
     <script>
-
         function fetchLaunch() {
-
             fetch('https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=1')
                 .then(function (response) {
                     return response.json();
                 })
-
                 .then(function (data) {
-                    if (data.results.length > 0) {
-                        var launch = data.results[0];
-                        var launchTime = new Date(launch.window_start).getTime();
-                        document.getElementById("launch-name").innerText = launch.name;
+                    var launch = data.results[0];
+                    var launchTime = new Date(launch.window_start).getTime();
+                    document.getElementById("launch-name").innerText = launch.name;
 
+                    updateCountdown(launchTime);
+                    setInterval(function () {
                         updateCountdown(launchTime);
-                        setInterval(function () {
-                            updateCountdown(launchTime);
-                        }, 1000);
-                    } else {
-                        document.getElementById("countdown").innerText = "No upcoming launches found.";
-                    }
+                    }, 1000);
                 })
                 .catch(function (error) {
                     document.getElementById("vastaus").innerHTML =
@@ -132,7 +134,7 @@
         }
 
         function fetchPastLaunches() {
-            fetch('https://lldev.thespacedevs.com/2.2.0/launch/previous/?limit=3')
+            fetch('https://lldev.thespacedevs.com/2.2.0/launch/previous/?limit=10')
                 .then(function (response) {
                     return response.json();
                 })
@@ -140,23 +142,29 @@
                     var carouselContent = document.getElementById('carousel-content');
                     carouselContent.innerHTML = '';
 
-                    if (data.results.length > 0) {
-                        data.results.forEach(function (launch, index) {
-                            var imageUrl = launch.image ? launch.image : "https://via.placeholder.com/500";
-                            var activeClass = index === 0 ? 'active' : '';
+                    data.results.forEach(function (launch, index) {
+                        var imageUrl = launch.image ? launch.image : "https://via.placeholder.com/500";
 
-                            var carouselItem =
-                                '<div class="carousel-item ' + activeClass + '">' +
-                                '<img src="' + imageUrl + '" class="d-block w-100" alt="Launch Image">' +
-                                '<div class="carousel-caption d-none d-md-block">' +
-                                '<h5>' + launch.name + '</h5>' +
-                                '<p>' + new Date(launch.window_start).toLocaleString('fi-FI') + '</p>' +
-                                '</div>' +
-                                '</div>';
-                            carouselContent.innerHTML += carouselItem;
-                        });
-                    } else {
-                        carouselContent.innerHTML = '<p>No past launches found.</p>';
+                        var carouselItem =
+                            '<div class="carousel-item">' +
+                            '<div class="col-4">' +
+                            '<img src="' + imageUrl + '" class="d-block w-100" alt="Launch Image">' +
+                            '<div class="carousel-caption d-none d-md-block">' +
+                            '<h5>' + launch.name + '</h5>' +
+                            '<p>' + new Date(launch.window_start).toLocaleString('fi-FI') + '</p>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
+
+                        carouselContent.innerHTML += carouselItem;
+                    });
+
+                    var items = carouselContent.getElementsByClassName('carousel-item');
+                    var totalItems = items.length;
+                    var itemWidth = 100 / 3;
+
+                    for (var i = 0; i < totalItems; i++) {
+                        items[i].style.flex = '0 0 ' + itemWidth + '%';
                     }
                 })
                 .catch(function (error) {
@@ -165,11 +173,29 @@
                 });
         }
 
+        function moveCarousel(direction) {
+            var carouselInner = document.querySelector('.carousel-inner');
+            var firstItem = carouselInner.firstElementChild;
+            var items = carouselInner.querySelectorAll('.carousel-item');
+
+            if (direction === 'next') {
+                carouselInner.appendChild(firstItem);
+            } else {
+                carouselInner.insertBefore(items[items.length - 1], items[0]);
+            }
+        }
+
+        document.getElementById("nextBtn").addEventListener("click", function () {
+            moveCarousel('next');
+        });
+
+        document.getElementById("prevBtn").addEventListener("click", function () {
+            moveCarousel('prev');
+        });
+
         fetchLaunch();
         fetchPastLaunches();
-
     </script>
-
 
 </body>
 
