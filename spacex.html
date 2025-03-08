@@ -49,6 +49,7 @@
     <div class="container d-lfex flex-column justify-content-center align-items-center text-center mt-4">
         <h2>Information on SpaceX Rocket Launches</h2>
         <p>This webpage displays information on previous and upcoming SpaceX launches.</p>
+        <p>You can view upcoming launches including launch date and time, rocket type and mission details from our <a class="nav-link" href="upcoming.html">Upcoming launches page</a>. To browse past launches take a look at our <a class="nav-link" href="archive.html">Past launch archive</a> </p>
     </div>
 
     <div class="container d-flex flex-column justify-content-center align-items-center text-center mt-4">
@@ -58,55 +59,45 @@
                 <div id="launchCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner" id="carousel-content">
                     </div>
-                    <button class="carousel-control-prev" type="button" id="prevBtn">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" id="nextBtn">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <script>
-        function fetchPast() {
-            fetch('https://lldev.thespacedevs.com/2.2.0/launch/previous/?limit=10')
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
-                    var carouselContent = document.getElementById('carousel-content');
-                    var karuselli = '';
+            <script>
+                function fetchPast() {
+                    fetch('https://lldev.thespacedevs.com/2.2.0/launch/previous/?limit=10')
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (data) {
+                            var carouselContent = document.getElementById('carousel-content');
+                            var karuselli = '';
 
-                    data.results.forEach(function (launch, index) {
-                        var kuvaUrl = launch.image ? launch.image : "https://via.placeholder.com/500";
-                        var karuselliKuva = '<div class="carousel-item' + (index === 0 ? ' active' : '') + '">' +
-                            '<img src="' + kuvaUrl + '" class="d-block w-100" alt="Launch Image">' +
-                            '<div class="carousel-caption d-block">' +
-                            '<h5>' + launch.name + '</h5>' +
-                            '<p>' + new Date(launch.window_start).toLocaleString('fi-FI') + '</p>' +
-                            '</div>' +
-                            '</div>';
+                            data.results.forEach(function (launch, index) {
+                                var kuvaUrl = launch.image ? launch.image : "https://via.placeholder.com/500";
+                                var karuselliKuva = '<div class="carousel-item' + (index === 0 ? ' active' : '') + '">' +
+                                    '<img src="' + kuvaUrl + '" class="d-block w-100" alt="Launch Image">' +
+                                    '<div class="carousel-caption d-block">' +
+                                    '<h5>' + launch.name + '</h5>' +
+                                    '<p>' + new Date(launch.window_start).toLocaleString('fi-FI') + '</p>' +
+                                    '</div>' +
+                                    '</div>';
 
-                        karuselli += karuselliKuva; // Concatenate the carousel items
-                    });
+                                karuselli += karuselliKuva;
+                            });
 
-                    carouselContent.innerHTML = karuselli;
+                            carouselContent.innerHTML = karuselli;
 
-                    var kuvakaruselli = new bootstrap.Carousel(document.getElementById('launchCarousel'), {
-                        ride: 'carousel'
-                    })
-                })
-                .catch(function (error) {
-                    document.getElementById('carousel-content').innerHTML = '<p class="text-danger">Failed to load past launches.</p>';
-                });
-        }
+                            var kuvakaruselli = new bootstrap.Carousel(document.getElementById('launchCarousel'), {
+                                ride: 'carousel'
+                            })
+                        })
+                        .catch(function (error) {
+                            document.getElementById('carousel-content').innerHTML = '<p class="text-danger">Failed to load past launches.</p>';
+                        });
+                }
 
-        fetchPast();
-    </script>
+                fetchPast();
+            </script>
 
 </body>
 
