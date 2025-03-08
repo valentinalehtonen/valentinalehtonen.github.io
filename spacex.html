@@ -61,7 +61,6 @@
         <h5 id="launch-name">Loading...</h5>
         <p>Time remaining:</p>
         <div id="countdown" class="fs-3 fw-bold text-danger">Loading...</div>
-        <a id="more-info" href="#" class="btn btn-primary mt-3" target="_blank">More Info</a>
     </div>
 
     <div class="container mt-5">
@@ -146,7 +145,7 @@
                         var imageUrl = launch.image ? launch.image : "https://via.placeholder.com/500";
 
                         var carouselItem =
-                            '<div class="carousel-item">' +
+                            '<div class="carousel-item' + (index === 0 ? ' active' : '') + '">' +
                             '<img src="' + imageUrl + '" class="d-block w-100" alt="Launch Image">' +
                             '<div class="carousel-caption d-none d-md-block">' +
                             '<h5>' + launch.name + '</h5>' +
@@ -154,7 +153,7 @@
                             '</div>' +
                             '</div>';
 
-                        carouselContent.innerHTML += carouselItem;
+                        carouselContent.insertAdjacentHTML('beforeend', carouselItem);
                     });
                 })
                 .catch(function (error) {
