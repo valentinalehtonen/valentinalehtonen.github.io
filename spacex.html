@@ -18,24 +18,13 @@
             height: 300px;
             object-fit: cover;
         }
-
-        .carousel-inner {
-            display: flex;
-        }
-
-        .carousel-inner>.carousel-item {
-            display: flex;
-            flex-direction: column;
-        }
     </style>
 </head>
 
 <body>
 
     <div class="p-5 bg-black text-white text-center">
-        <a href="spacex.html" style="text-decoration: none; color: white;">
-            <h1>SpaceX Rocket Launches</h1>
-        </a>
+        <h1>SpaceX Rocket Launches</h1>
         <p>Upcoming launch data and past launch archive</p>
     </div>
 
@@ -79,20 +68,6 @@
         </div>
     </div>
 
-    <div class="container-fluid p-4 bg-dark text-white text-center mt-4">
-        <ul class="nav justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link text-white" href="spacex.html">Front page</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="upcoming.html">Upcoming launches</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="archive.html">Past launch archive</a>
-            </li>
-        </ul>
-    </div>
-
     <script>
         function fetchLaunch() {
             fetch('https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=1')
@@ -103,11 +78,7 @@
                     var launch = data.results[0];
                     var launchTime = new Date(launch.window_start).getTime();
                     document.getElementById("launch-name").innerText = launch.name;
-
                     updateCountdown(launchTime);
-                    setInterval(function () {
-                        updateCountdown(launchTime);
-                    }, 1000);
                 })
                 .catch(function (error) {
                     document.getElementById("vastaus").innerHTML =
@@ -143,8 +114,7 @@
 
                     data.results.forEach(function (launch, index) {
                         var imageUrl = launch.image ? launch.image : "https://via.placeholder.com/500";
-
-                        var carouselItem =
+                        var carouselItem = 
                             '<div class="carousel-item' + (index === 0 ? ' active' : '') + '">' +
                             '<img src="' + imageUrl + '" class="d-block w-100" alt="Launch Image">' +
                             '<div class="carousel-caption d-block">' +
@@ -153,34 +123,13 @@
                             '</div>' +
                             '</div>';
 
-                        carouselContent.insertAdjacentHTML('beforeend', carouselItem);
+                        carouselContent.innerHTML += carouselItem;
                     });
                 })
                 .catch(function (error) {
-                    console.error('Error fetching past launches:', error);
                     document.getElementById('carousel-content').innerHTML = '<p class="text-danger">Failed to load past launches.</p>';
                 });
         }
-
-        function moveCarousel(direction) {
-            var carouselInner = document.querySelector('.carousel-inner');
-            var firstItem = carouselInner.firstElementChild;
-            var items = carouselInner.querySelectorAll('.carousel-item');
-
-            if (direction === 'next') {
-                carouselInner.appendChild(firstItem);
-            } else {
-                carouselInner.insertBefore(items[items.length - 1], items[0]);
-            }
-        }
-
-        document.getElementById("nextBtn").addEventListener("click", function () {
-            moveCarousel('next');
-        });
-
-        document.getElementById("prevBtn").addEventListener("click", function () {
-            moveCarousel('prev');
-        });
 
         fetchLaunch();
         fetchPastLaunches();
