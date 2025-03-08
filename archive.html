@@ -55,7 +55,7 @@
     </nav>
 
     <div class="container-fluid p-4 d-flex flex-column justify-content-center align-items-center">
-        <div id="past-launches" class="d-flex flex-column align-items-center mt-4"></div>
+        <div id="vastaus" class="d-flex flex-column align-items-center mt-4"></div>
     </div>
 
     <div class="container-fluid p-4 bg-dark text-white text-center mt-4">
@@ -81,33 +81,33 @@
                 })
 
                 .then(function (data) {
-                    var pastLaunchesContainer = document.getElementById("past-launches");
-                    pastLaunchesContainer.innerHTML = "";
+                    var kortit = document.getElementById("vastaus");
+                    kortit.innerHTML = "";
 
                         var content = "";
 
                         for (var i = 0; i < data.results.length; i++) {
                             var launch = data.results[i];
-                            var launchDate = new Date(launch.window_start);
-                            var formattedDate = launchDate.toLocaleDateString('fi-FI');
-                            var formattedTime = launchDate.toLocaleTimeString('fi-FI');
+                            var pvm = new Date(data.results[i].window_start);
+                            var pvmEU = pvm.toLocaleDateString('fi-FI');
+                            var aikaEU = pvm.toLocaleTimeString('fi-FI');
 
-                            var imageUrl = launch.image ? launch.image : "https://via.placeholder.com/500";
+                            var kuvaUrl = data.results[i] ? data.results[i] : "https://via.placeholder.com/500";
 
-                            content +=
+                            kortti +=
                                 "<div class='card bg-dark text-white mb-3' style='max-width: 500px;'>" +
-                                "<img class='card-img-top' src='" + imageUrl + "' alt='Launch Image'>" +
+                                "<img class='card-img-top' src='" + kuvaUrl + "' alt='Kuva raketista'>" +
                                 "<div class='card-body'>" +
-                                "<h5 class='card-title'>" + launch.name + "</h5>" +
-                                "<p class='card-text'>Date: " + formattedDate + " " + formattedTime + "</p>" +
+                                "<h5 class='card-title'>" + data.results[i].name + "</h5>" +
+                                "<p class='card-text'>Date: " + pvmEU + " " + aikaEU + "</p>" +
                                 "</div>" +
                                 "</div>";
                         }
 
-                        pastLaunchesContainer.innerHTML = content;
+                        kortit.innerHTML = kortti;
                 })
                 .catch(function (error) {
-                    document.getElementById("past-launches").innerHTML = "<p class='text-danger'>Failed to load past launches.</p>";
+                    document.getElementById("vastaus").innerHTML = "<p class='text-danger'>Failed to load past launches.</p>";
                 });
         }
 
