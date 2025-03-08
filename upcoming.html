@@ -81,8 +81,8 @@
                         kuvaus = data.results[i].mission.description;
 
                         var pvm = new Date(data.results[i].window_start);
-                        pvm = pvm.toLocaleDateString('fi-FI');
-                        var aika = pvm.toLocaleTimeString('fi-FI');
+                        var pvmEU = pvm.toLocaleDateString('fi-FI');
+                        var aikaEU = pvm.toLocaleTimeString('fi-FI');
 
                         var kortti = "<div class='container'>" + "<div class='row align-items-center'>"
                             + "<div class='col-md-7'>" + "<img src='" + kuvaUrl + "' class='kuva' alt='Kuva rakettilähdöstä'>"
