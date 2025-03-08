@@ -68,7 +68,7 @@
 
                 .then(function (data) {
                     var arkisto = document.getElementById("vastaus");
-                    vastaus.innerHTML = "";
+                    arkisto.innerHTML = "";
                     var kuvaUrl = "";
                     var rakettiNimi = "";
                     var mission = "";
@@ -76,15 +76,15 @@
 
                     for (var i = 0; i < data.results.length; i++) {
                         kuvaUrl = data.results[i].image;
-                        rakettiNimi = data.results[i].configuration.name;
+                        rakettiNimi = data.results[i].rocket.configuration.name;
                         mission = data.results[i].mission.name;
                         kuvaus = data.results[i].mission.description;
 
                         var pvm = new Date(data.results[i].window_start);
                         pvm = pvm.toLocaleDateString('fi-FI');
-                        var aika = pvn.toLocaleTimeString('fi-FI');
+                        var aika = pvm.toLocaleTimeString('fi-FI');
 
-                        var kortti = "<div class=-container->" + "<div class='row align-items-center vastaus->"
+                        var kortti = "<div class='container'>" + "<div class='row align-items-center'>"
                             + "<div class='col-md-7'>" + "<img src='" + kuvaUrl + "' class='kuva' alt='Kuva rakettilähdöstä'>"
                             + "</div>" + "<div class='col-md-6 text-start'>" + "<h5>" + rakettiNimi + "</h5>"
                             + "<p>" + mission + "</p>" + "<p>" + kuvaus + "</p>" + "<p>" + pvm + " " + aika + "</p>"
