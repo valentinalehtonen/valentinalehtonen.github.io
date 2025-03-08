@@ -41,7 +41,7 @@
     </nav>
 
     <div class="container d-flex flex-column justify-content-center align-items-center text-center mt-4">
-        <div id="vastaus"></div>
+        <div id="vastaus" class="mt-4"></div>
         <h2>Upcoming launches</h2>
     </div>
 
@@ -61,40 +61,41 @@
 
     <script>
         function fetchLaunch() {
-            fetch('https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=1')
+            fetch('https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=10')
                 .then(function (response) {
                     return response.json();
                 })
 
                 .then(function (data) {
-                    var launch = data.results[0];
-                    var launchTime = new Date(launch.window_start).getTime();
-                    document.getElementById("launch-name").innerText = launch.name;
-                    document.getElementById("more-info").href = launch.vid_urls?.[0] || "#";
+                    var arkisto = document.getElementById("vastaus");
+                    vastaus.innerHTML = "";
+                    var kuvaUrl = "";
+                    var rakettiNimi = "";
+                    var mission = "";
+                    var kuvaus = "";
 
-                    updateCountdown(launchTime);
-                    setInterval(() => updateCountdown(launchTime), 1000);
+                    for (var i = 0; i < data.results.length; i++) {
+                        kuvaUrl = data.results[i].image;
+                        rakettiNimi = data.results[i].configuration.name;
+                        mission = data.results[i].mission.name;
+                        kuvaus = data.results[i].mission.description;
+
+                        var pvm = new Date(data.results[i].window_start);
+                        pvm = pvm.toLocaleDateString('fi-FI');
+                        var aika = pvn.toLocaleTimeString('fi-FI');
+
+                        var kortti = "<div class=-container->" + "<div class='row align-items-center vastaus->"
+                            + "<div class='col-md-7'>" + "<img src='" + kuvaUrl + "' class='kuva' alt='Kuva rakettilähdöstä'>"
+                            + "</div>" + "<div class='col-md-6 text-start'>" + "<h5>" + rakettiNimi + "</h5>"
+                            + "<p>" + mission + "</p>" + "<p>" + kuvaus + "</p>" + "<p>" + pvm + " " + aika + "</p>"
+                            + "</div>" + "</div>" + "</div>";
+                        arkisto.innerHTML += kortti;
+                    }
                 })
                 .catch(function (error) {
                     document.getElementById("vastaus").innerHTML =
                         "<p class='text-danger'>No launch data found.</p>";
                 });
-        }
-
-        function updateCountdown(launchTime) {
-            var difference = launchTime - new Date().getTime();
-
-            if (difference <= 0) {
-                document.getElementById("countdown").innerText = "Launch has occurred!";
-                return;
-            }
-
-            var days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-            document.getElementById("countdown").innerText = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
         }
 
         fetchLaunch();
