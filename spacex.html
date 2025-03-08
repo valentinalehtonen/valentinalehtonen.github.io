@@ -18,6 +18,12 @@
             height: 300px;
             object-fit: cover;
         }
+
+        .kuva {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
     </style>
 </head>
 
@@ -47,16 +53,24 @@
     </nav>
 
     <div class="container-fluid p-4 d-flex flex-column justify-content-center align-items-center">
-        <div class="d-flex flex-column justify-content-center align-items-center text-center mt-4" style="max-width: 600px">
+        <div class="d-flex flex-column justify-content-center align-items-center text-center mt-4"
+            style="max-width: 600px">
             <h2>Information on SpaceX Rocket Launches</h2>
             <p>This webpage displays information on previous and upcoming SpaceX launches.</p>
-            <p>You can view upcoming launches including launch date and time, rocket type and mission details from our 
-                <a href="upcoming.html" style="text-decoration: none; color: #939ea8">Upcoming launches page</a>. 
-                To browse past launches, take a look at our 
-                <a href="archive.html" style="text-decoration: none; color: #939ea8">Past launch archive.</a> 
+            <p>You can view upcoming launches including launch date and time, rocket type and mission details from our
+                <a href="upcoming.html" style="text-decoration: none; color: #939ea8">Upcoming launches page</a>.
+                To browse past launches, take a look at our
+                <a href="archive.html" style="text-decoration: none; color: #939ea8">Past launch archive.</a>
             </p>
         </div>
-    
+
+        <div class="d-flex flex-column justify-content-center align-items-center text-center mt-4">
+            <div id="seuraava">
+                <h2 class="text-center text-white">Next Launch</h2>
+                <div class="mt-4" id="seuraavalahto"></div>
+            </div>
+        </div>
+
         <div class="d-flex flex-column justify-content-center align-items-center text-center mt-4">
             <div id="vastaus">
                 <div class="mt-5">
@@ -64,11 +78,13 @@
                     <div id="launchCarousel" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner" id="carousel-content">
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#launchCarousel" data-bs-slide="prev">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#launchCarousel"
+                            data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#launchCarousel" data-bs-slide="next">
+                        <button class="carousel-control-next" type="button" data-bs-target="#launchCarousel"
+                            data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
@@ -78,56 +94,89 @@
         </div>
     </div>
 
-        <div class="container-fluid p-4 bg-dark text-white text-center mt-4">
-            <ul class="nav justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="spacex.html">Front page</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="upcoming.html">Upcoming launches</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="archive.html">Past launch archive</a>
-                </li>
-            </ul>
-        </div>
+    <div class="container-fluid p-4 bg-dark text-white text-center mt-4">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-white" href="spacex.html">Front page</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="upcoming.html">Upcoming launches</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="archive.html">Past launch archive</a>
+            </li>
+        </ul>
+    </div>
 
-        <script>
-            function fetchPast() {
-                fetch('https://lldev.thespacedevs.com/2.2.0/launch/previous/?limit=10')
-                    .then(function (response) {
-                        return response.json();
-                    })
-                    .then(function (data) {
-                        var carouselContent = document.getElementById('carousel-content');
-                        var karuselli = '';
+    <script>
+        function fetchPast() {
+            fetch('https://lldev.thespacedevs.com/2.2.0/launch/previous/?limit=10')
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    var carouselContent = document.getElementById('carousel-content');
+                    var karuselli = '';
 
-                        data.results.forEach(function (launch, index) {
-                            var kuvaUrl = launch.image ? launch.image : "https://via.placeholder.com/500";
-                            var karuselliKuva = '<div class="carousel-item' + (index === 0 ? ' active' : '') + '">' +
-                                '<img src="' + kuvaUrl + '" class="d-block w-100" alt="Launch Image">' +
-                                '<div class="carousel-caption d-block">' +
-                                '<h5>' + launch.name + '</h5>' +
-                                '<p>' + new Date(launch.window_start).toLocaleString('fi-FI') + '</p>' +
-                                '</div>' +
-                                '</div>';
+                    data.results.forEach(function (lahto, index) {
+                        var karuselliKuva = '<div class="carousel-item' + (index === 0 ? ' active' : '') + '">' +
+                            '<img src="' + lahto.image + '" class="d-block w-100" alt="Kuva raketista">' +
+                            '<div class="carousel-caption d-block">' +
+                            '<h5>' + lahto.name + '</h5>' +
+                            '<p>' + new Date(lahto.window_start).toLocaleString('fi-FI') + '</p>' +
+                            '</div>' +
+                            '</div>';
 
-                            karuselli += karuselliKuva;
-                        });
-
-                        carouselContent.innerHTML = karuselli;
-
-                        var kuvakaruselli = new bootstrap.Carousel(document.getElementById('launchCarousel'), {
-                            ride: 'carousel'
-                        })
-                    })
-                    .catch(function (error) {
-                        document.getElementById('carousel-content').innerHTML = '<p class="text-danger">Failed to load past launches.</p>';
+                        karuselli += karuselliKuva;
                     });
-            }
 
-            fetchPast();
-        </script>
+                    carouselContent.innerHTML = karuselli;
+
+                    var kuvakaruselli = new bootstrap.Carousel(document.getElementById('launchCarousel'), {
+                        ride: 'carousel'
+                    })
+                })
+                .catch(function (error) {
+                    document.getElementById('carousel-content').innerHTML = '<p class="text-danger">Failed to load past launches.</p>';
+                });
+        }
+
+        function fetchNext() {
+            fetch('https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=1')
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    var pvm = new Date(data.results[0].window_start);
+                    var pvmEU = pvm.toLocaleDateString('fi-FI');
+                    var aikaEU = pvm.toLocaleTimeString('fi-FI');
+
+                    var lahto =
+                        "<div class='container-fluid'>" +
+                        "<div class='row align-items-center my-4 p-3 bg-dark rounded'>" +
+                        "<div class='col-md-6'>" +
+                        "<img src='" + data.results[0].image + "' class='kuva' alt='Kuva raketista'>" +
+                        "</div>" +
+                        "<div class='col-md-6 text-start'>" +
+                        "<h5>" + data.results[0].rocket.configuration.name + "</h5>" +
+                        "<p><strong>Mission:</strong> " + data.results[0].mission.name + "</p>" +
+                        "<p><strong>Details:</strong> " + data.results[0].mission.description + "</p>" +
+                        "<p><strong>Date:</strong> " + pvmEU + " " + aikaEU + "</p>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>";
+
+                    document.getElementById("seuraavalahto").innerHTML = lahto;
+                })
+                .catch(function (error) {
+                    document.getElementById("seuraavalahto").innerHTML =
+                        "<p class='text-danger'>No upcoming launch data found.</p>";
+                });
+        }
+
+        fetchPast();
+        fetchNext();
+    </script>
 
 </body>
 

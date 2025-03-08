@@ -77,11 +77,6 @@
                     arkisto.innerHTML = "";
 
                     for (var i = 0; i < data.results.length; i++) {
-                        var kuvaUrl = data.results[i].image;
-                        var raketti = data.results[i].rocket.configuration.name;
-                        var mission = data.results[i].mission.name;
-                        var kuvaus = data.results[i].mission.description;
-
                         var pvm = new Date(data.results[i].window_start);
                         var pvmEU = pvm.toLocaleDateString('fi-FI');
                         var aikaEU = pvm.toLocaleTimeString('fi-FI');
@@ -90,16 +85,14 @@
                             "<div class='container-fluid'>" +
                             "<div class='row align-items-center my-4 p-3 bg-dark rounded'>" +
                             "<div class='col-md-6'>" +
-                            "<img src='" + kuvaUrl + "' class='kuva' alt='Launch Image'>" +
+                            "<img src='" + data.results[i].image + "' class='kuva' alt='Launch Image'>" +
                             "</div>" +
                             "<div class='col-md-6 text-start'>" +
-                            "<h5>" + raketti + "</h5>" +
-                            "<p><strong>Mission:</strong> " + mission + "</p>" +
-                            "<p><strong>Details:</strong> " + kuvaus + "</p>" +
+                            "<h5>" + data.results[i].rocket.configuration.name + "</h5>" +
+                            "<p><strong>Mission:</strong> " + data.results[i].mission.name + "</p>" +
+                            "<p><strong>Details:</strong> " + kuvdata.results[i].mission.descriptionaus + "</p>" +
                             "<p><strong>Date:</strong> " + pvmEU + " " + aikaEU + "</p>" +
-                            "</div>" +
-                            "</div>" +
-                            "</div>";
+                            "</div>" + "</div>" + "</div>";
                         arkisto.innerHTML += kortti;
                     }
                 })
@@ -112,7 +105,6 @@
         fetchLaunch();
 
     </script>
-
 
 </body>
 
