@@ -52,7 +52,9 @@
         </div>
     </nav>
 
-    <div id="past-launches" class="container mt-4"></div>
+    <div class="d-flex justify-content-center flex-wrap">
+        <div id="past-launches" class="container mt-4"></div>
+    </div>
 
     <div class="container-fluid p-4 bg-dark text-white text-center mt-4">
         <ul class="nav justify-content-center">
@@ -85,6 +87,8 @@
 
                         for (var i = 0; i < data.results.length; i++) {
                             var launch = data.results[i];
+                            var launchDate = new Date(launch.window_start);
+                            var formattedDate = launchDate.toLocaleDateString('fi-FI');
 
                             var imageUrl = launch.image ? launch.image : "https://via.placeholder.com/500";
                             var videoUrl = (launch.vid_urls && launch.vid_urls.length > 0) ? launch.vid_urls[0] : "#";
@@ -94,7 +98,7 @@
                                 "<img class='card-img-top' src='" + imageUrl + "' alt='Launch Image'>" +
                                 "<div class='card-body'>" +
                                 "<h5 class='card-title'>" + launch.name + "</h5>" +
-                                "<p class='card-text'>Date: " + launch.window_start + "</p>" +
+                                "<p class='card-text'>Date: " + formattedDate + "</p>" +
                                 "<a href='" + videoUrl + "' class='btn btn-primary' target='_blank'>More Info</a>" +
                                 "</div>" +
                                 "</div>";
