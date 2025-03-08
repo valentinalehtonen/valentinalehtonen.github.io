@@ -78,7 +78,7 @@
 
                     for (var i = 0; i < data.results.length; i++) {
                         var kuvaUrl = data.results[i].image;
-                        var rakettiNimi = data.results[i].rocket.configuration.name;
+                        var raketti = data.results[i].rocket.configuration.name;
                         var mission = data.results[i].mission.name;
                         var kuvaus = data.results[i].mission.description;
 
@@ -93,7 +93,7 @@
                             "<img src='" + kuvaUrl + "' class='kuva' alt='Launch Image'>" +
                             "</div>" +
                             "<div class='col-md-6 text-start'>" +
-                            "<h5>" + rakettiNimi + "</h5>" +
+                            "<h5>" + raketti + "</h5>" +
                             "<p><strong>Mission:</strong> " + mission + "</p>" +
                             "<p><strong>Details:</strong> " + kuvaus + "</p>" +
                             "<p><strong>Date:</strong> " + pvmEU + " " + aikaEU + "</p>" +
