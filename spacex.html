@@ -113,46 +113,24 @@
                     var carouselContent = document.getElementById('carousel-content');
                     carouselContent.innerHTML = '';
 
+                    var carouselItems = '';
                     data.results.forEach(function (launch, index) {
                         var imageUrl = launch.image ? launch.image : "https://via.placeholder.com/500";
-
-                        var carouselItem =
-                            '<div class="carousel-item' + (index === 0 ? ' active' : '') + '">' +
+                        var carouselItem = '<div class="carousel-item' + (index === 0 ? ' active' : '') + '">' +
                             '<img src="' + imageUrl + '" class="d-block w-100" alt="Launch Image">' +
                             '<div class="carousel-caption d-block">' +
                             '<h5>' + launch.name + '</h5>' +
                             '<p>' + new Date(launch.window_start).toLocaleString('fi-FI') + '</p>' +
                             '</div>' +
                             '</div>';
-
-                        carouselContent.insertAdjacentHTML('beforeend', carouselItem);
+                        carouselItems += carouselItem;
                     });
+                    carouselContent.innerHTML = carouselItems;
                 })
                 .catch(function (error) {
-                    console.error('Error fetching past launches:', error);
                     document.getElementById('carousel-content').innerHTML = '<p class="text-danger">Failed to load past launches.</p>';
                 });
         }
-
-        function moveCarousel(direction) {
-            var carouselInner = document.querySelector('.carousel-inner');
-            var firstItem = carouselInner.firstElementChild;
-            var items = carouselInner.querySelectorAll('.carousel-item');
-
-            if (direction === 'next') {
-                carouselInner.appendChild(firstItem);
-            } else {
-                carouselInner.insertBefore(items[items.length - 1], items[0]);
-            }
-        }
-
-        document.getElementById("nextBtn").addEventListener("click", function () {
-            moveCarousel('next');
-        });
-
-        document.getElementById("prevBtn").addEventListener("click", function () {
-            moveCarousel('prev');
-        });
 
         fetchLaunch();
         fetchPastLaunches();
