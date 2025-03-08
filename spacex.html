@@ -87,18 +87,17 @@
         }
 
         function updateCountdown(launchTime) {
-            var now = new Date().getTime();
-            var timeDiff = launchTime - now;
+            var difference = launchTime - new Date().getTime();
 
-            if (timeDiff <= 0) {
+            if (difference <= 0) {
                 document.getElementById("countdown").innerText = "Launch has occurred!";
                 return;
             }
 
-            var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            var days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
             document.getElementById("countdown").innerText = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
         }
