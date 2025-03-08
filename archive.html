@@ -84,19 +84,16 @@
                     var kortit = document.getElementById("vastaus");
                     kortit.innerHTML = "";
 
-                        var content = "";
+                    var kortti = "";
 
                         for (var i = 0; i < data.results.length; i++) {
-                            var launch = data.results[i];
                             var pvm = new Date(data.results[i].window_start);
                             var pvmEU = pvm.toLocaleDateString('fi-FI');
                             var aikaEU = pvm.toLocaleTimeString('fi-FI');
 
-                            var kuvaUrl = data.results[i] ? data.results[i] : "https://via.placeholder.com/500";
-
                             kortti +=
                                 "<div class='card bg-dark text-white mb-3' style='max-width: 500px;'>" +
-                                "<img class='card-img-top' src='" + kuvaUrl + "' alt='Kuva raketista'>" +
+                                "<img class='card-img-top img' src='" + data.results[i].image + "' alt='Kuva raketista'>" +
                                 "<div class='card-body'>" +
                                 "<h5 class='card-title'>" + data.results[i].name + "</h5>" +
                                 "<p class='card-text'>Date: " + pvmEU + " " + aikaEU + "</p>" +
