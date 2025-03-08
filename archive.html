@@ -89,17 +89,16 @@
                             var launch = data.results[i];
                             var launchDate = new Date(launch.window_start);
                             var formattedDate = launchDate.toLocaleDateString('fi-FI');
+                            var formattedTime = launchDate.toLocaleTimeString('fi-FI');
 
                             var imageUrl = launch.image ? launch.image : "https://via.placeholder.com/500";
-                            var videoUrl = (launch.vid_urls && launch.vid_urls.length > 0) ? launch.vid_urls[0] : "#";
 
                             content +=
                                 "<div class='card bg-dark text-white mb-3' style='max-width: 500px;'>" +
                                 "<img class='card-img-top' src='" + imageUrl + "' alt='Launch Image'>" +
                                 "<div class='card-body'>" +
                                 "<h5 class='card-title'>" + launch.name + "</h5>" +
-                                "<p class='card-text'>Date: " + formattedDate + "</p>" +
-                                "<a href='" + videoUrl + "' class='btn btn-primary' target='_blank'>More Info</a>" +
+                                "<p class='card-text'>Date: " + formattedDate + " " + formattedTime  + "</p>" +
                                 "</div>" +
                                 "</div>";
                         }
