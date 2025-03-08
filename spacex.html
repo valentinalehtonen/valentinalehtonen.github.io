@@ -90,6 +90,10 @@
                     });
 
                     carouselContent.innerHTML = karuselli;
+
+                    var kuvakaruselli = new bootstrap.Carousel(document.getElementById('launchCarousel'), {
+                        ride: 'carousel'
+                    })
                 })
                 .catch(function (error) {
                     document.getElementById('carousel-content').innerHTML = '<p class="text-danger">Failed to load past launches.</p>';
