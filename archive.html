@@ -84,7 +84,6 @@
                     var pastLaunchesContainer = document.getElementById("past-launches");
                     pastLaunchesContainer.innerHTML = "";
 
-                    if (data.results.length > 0) {
                         var content = "";
 
                         for (var i = 0; i < data.results.length; i++) {
@@ -106,9 +105,6 @@
                         }
 
                         pastLaunchesContainer.innerHTML = content;
-                    } else {
-                        pastLaunchesContainer.innerHTML = "<p>No past launches found.</p>";
-                    }
                 })
                 .catch(function (error) {
                     document.getElementById("past-launches").innerHTML = "<p class='text-danger'>Failed to load past launches.</p>";
