@@ -47,93 +47,56 @@
     </nav>
 
     <div class="container d-flex flex-column justify-content-center align-items-center text-center mt-4">
-        <div id="vastaus"></div>
-        <h2>Next Launch Countdown</h2>
-        <h5 id="launch-name">Loading...</h5>
-        <p>Time remaining:</p>
-        <div id="countdown" class="fs-3 fw-bold text-danger">Loading...</div>
-    </div>
-
-    <div class="container mt-5">
-        <h2 class="text-center text-white">Past Launches</h2>
-        <div id="launchCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner" id="carousel-content">
+        <div id="vastaus">
+            <div class="container mt-5">
+                <h2 class="text-center text-white">Past Launches</h2>
+                <div id="launchCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner" id="carousel-content">
+                    </div>
+                    <button class="carousel-control-prev" type="button" id="prevBtn">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" id="nextBtn">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
             </div>
-            <button class="carousel-control-prev" type="button" id="prevBtn">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" id="nextBtn">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
     </div>
 
     <script>
-        function fetchLaunch() {
-            fetch('https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=1')
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
-                    var launch = data.results[0];
-                    var launchTime = new Date(launch.window_start).getTime();
-                    document.getElementById("launch-name").innerText = launch.name;
-                    updateCountdown(launchTime);
-                })
-                .catch(function (error) {
-                    document.getElementById("vastaus").innerHTML =
-                        "<p class='text-danger'>No launch data found.</p>";
-                });
-        }
-
-        function updateCountdown(launchTime) {
-            var difference = launchTime - new Date().getTime();
-
-            if (difference <= 0) {
-                document.getElementById("countdown").innerText = "Launch has occurred!";
-                return;
-            }
-
-            var days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-            document.getElementById("countdown").innerText = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
-        }
-
-        function fetchPastLaunches() {
+        function fetchPast() {
             fetch('https://lldev.thespacedevs.com/2.2.0/launch/previous/?limit=10')
                 .then(function (response) {
                     return response.json();
                 })
                 .then(function (data) {
                     var carouselContent = document.getElementById('carousel-content');
-                    carouselContent.innerHTML = '';
+                    var karuselli = '';
 
-                    var carouselItems = '';
                     data.results.forEach(function (launch, index) {
-                        var imageUrl = launch.image ? launch.image : "https://via.placeholder.com/500";
-                        var carouselItem = '<div class="carousel-item' + (index === 0 ? ' active' : '') + '">' +
-                            '<img src="' + imageUrl + '" class="d-block w-100" alt="Launch Image">' +
+                        var kuvaUrl = launch.image ? launch.image : "https://via.placeholder.com/500";
+                        var karuselliKuva = '<div class="carousel-item' + (index === 0 ? ' active' : '') + '">' +
+                            '<img src="' + kuvaUrl + '" class="d-block w-100" alt="Launch Image">' +
                             '<div class="carousel-caption d-block">' +
                             '<h5>' + launch.name + '</h5>' +
                             '<p>' + new Date(launch.window_start).toLocaleString('fi-FI') + '</p>' +
                             '</div>' +
                             '</div>';
-                        carouselItems += carouselItem;
+
+                        karuselli += karuselliKuva; // Concatenate the carousel items
                     });
-                    carouselContent.innerHTML = carouselItems;
+
+                    carouselContent.innerHTML = karuselli;
                 })
                 .catch(function (error) {
                     document.getElementById('carousel-content').innerHTML = '<p class="text-danger">Failed to load past launches.</p>';
                 });
         }
 
-        fetchLaunch();
-        fetchPastLaunches();
+        fetchPast();
     </script>
 
 </body>
